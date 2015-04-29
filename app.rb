@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'sinatra/json'
 require 'haml'
+require 'mime-types'
+
 require_relative 'lib/flickr.rb'
 require_relative 'lib/google_drive.rb'
 
