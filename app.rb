@@ -32,9 +32,9 @@ post "/upload" do
     File.open(file_path, "w") do |f|
       f.write(params['myfile'][:tempfile].read)
     end
-    is_pdf = (File.extname(file_name).downcase == '.pdf')
-
-    service =  is_pdf ? Service::GoogleDrive.new : Service::Flickr.new
+    
+    is_image = (MIME::Types.of(file_name).first.media_type == 'image')
+    service =  is_image ? Service::Flickr.new(config) : Service::GoogleDrive.new(config)
 
     json(service.upload(file_path, file_name))
   rescue Exception => e
