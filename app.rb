@@ -1,6 +1,9 @@
 require 'sinatra'
 require 'sinatra/json'
 require 'haml'
+require_relative 'lib/flickr.rb'
+require_relative 'lib/google_drive.rb'
+
 
 before do
   headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
@@ -30,7 +33,6 @@ post "/upload" do
       f.write(params['myfile'][:tempfile].read)
     end
     is_pdf = (File.extname(file_name).downcase == '.pdf')
-
 
     service =  is_pdf ? Service::GoogleDrive.new : Service::Flickr.new
 
