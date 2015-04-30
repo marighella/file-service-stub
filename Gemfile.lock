@@ -4,6 +4,7 @@ GEM
     backports (3.6.4)
     haml (4.0.6)
       tilt
+    mime-types (2.5)
     multi_json (1.11.0)
     rack (1.6.0)
     rack-protection (1.5.3)
@@ -29,6 +30,7 @@ PLATFORMS
 
 DEPENDENCIES
   haml
+  mime-types
   rake
   sinatra
   sinatra-contrib

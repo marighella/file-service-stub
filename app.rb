@@ -36,7 +36,7 @@ post "/upload" do
     end
     
     is_image = (MIME::Types.of(file_name).first.media_type == 'image')
-    service =  is_image ? Service::Flickr.new(config) : Service::GoogleDrive.new(config)
+    service =  is_image ? Service::Flickr.new() : Service::GoogleDrive.new()
 
     json(service.upload(file_path, file_name))
   rescue Exception => e
