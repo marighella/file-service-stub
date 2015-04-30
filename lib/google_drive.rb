@@ -6,6 +6,7 @@ module Service
     def upload(file_path, file_name)
       {
         link: 'https://docs.google.com/uc?id=0B46YLSm1qo-6eE1WeHdQalF3S0k&export=download',
+        embed: 'https://docs.google.com/uc?id=0B46YLSm1qo-6eE1WeHdQalF3S0k',
         thumbnail: 'http://farm4.staticflickr.com/3939/15458051067_f2f7afa6e8_b.jpg',
         title: 'Racionais Mc\'s - Mil Faces de um Homem Leal (Carlos Marighella) - Videoclipe Oficial.mp3',
         basename: 'Racionais Mc\'s - Mil Faces de um Homem Leal (Carlos Marighella) - Videoclipe Oficial',
