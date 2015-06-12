@@ -5,7 +5,10 @@ require 'mime-types'
 
 require_relative 'lib/flickr.rb'
 require_relative 'lib/google_drive.rb'
+use Rack::MethodOverride
 
+HTTP_STATUS_OK = 200
+HTTP_STATUS_OK_NO_CONTENT = 204
 
 before do
   headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
@@ -14,14 +17,18 @@ before do
   headers['Access-Control-Allow-Credentials'] = 'true'
 end
 
-options "*" do
-  response.headers["Allow"] = "HEAD,GET,PUT,DELETE,OPTIONS"
-  response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
+options '*' do
+  response.headers['Allow'] = 'HEAD, GET, PUT, DELETE, OPTIONS'
+  response.headers['Access-Control-Allow-Headers'] = 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept'
   halt HTTP_STATUS_OK
 end
 
 get "/upload" do
   haml :upload
+end
+
+delete '/upload' do
+  halt HTTP_STATUS_OK_NO_CONTENT
 end
 
 post "/upload" do
@@ -34,7 +41,7 @@ post "/upload" do
     File.open(file_path, "w") do |f|
       f.write(params['myfile'][:tempfile].read)
     end
-    
+
     is_image = (MIME::Types.of(file_name).first.media_type == 'image')
     service =  is_image ? Service::Flickr.new() : Service::GoogleDrive.new()
 
