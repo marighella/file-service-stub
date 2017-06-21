@@ -8,6 +8,7 @@ module Service
                 title: 'Carlos_Marighella.jpg'}
 
       links.inject({}) do |hash, (key,value)|
+        hash[key] = value
         hash
       end
     end
